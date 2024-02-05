@@ -1,0 +1,30 @@
+{
+    "name": "geologix-dapp-project",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "test": "hardhat test",
+      "deploy": "node scripts/deploy.js",
+      "start": "http-server frontend"
+    },
+    "dependencies": {
+      "@openzeppelin/contracts": "^4.4.0",
+      "ethers": "^5.5.0",
+      "hardhat": "^2.8.4",
+      "http-server": "^14.0.1"
+    },
+    "devDependencies": {
+      "chai": "^4.3.4",
+      "hardhat-ethers": "^2.1.0",  
+      "hardhat-waffle": "^2.1.1",
+      "openzeppelin-test-helpers": "^0.5.5"
+    },
+    "license": "MIT",
+    "description": "",
+    "directories": {
+      "test": "test"
+    },
+    "keywords": [],
+    "author": ""
+  }
+  
