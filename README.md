@@ -43,7 +43,7 @@ GeoLogix-DApp-Project/
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/GeoLogix-DApp-Project.git
+    git clone https://github.com/HabtamuFeyera/GeoLogix-DApp-Project.git
     cd GeoLogix-DApp-Project
     ```
 
