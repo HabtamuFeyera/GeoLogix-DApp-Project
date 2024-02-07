@@ -1,27 +1,19 @@
-const { expect } = require("chai");
-const { ethers } = require("ethers");
+// Solidity test file for RefundByLocation smart contract
+const RefundByLocation = artifacts.require("RefundByLocation");
 
-describe("RefundByLocation", function () {
-    it("Should deploy and mint initial tokens", async function () {
-        const GeoToken = await ethers.getContractFactory("GeoToken");
-        const geoToken = await GeoToken.deploy();
+contract("RefundByLocation", async accounts => {
+  let refundByLocation;
 
-        await geoToken.deployed();
+  before(async () => {
+    refundByLocation = await RefundByLocation.new(3600, 100); // Time limit: 1 hour, GPS range: 100
+  });
 
-        // Minting logic goes here, and you can add assertions to check the minted supply
+  it("should add device", async () => {
+    await refundByLocation.addDevice(accounts[1]);
+    const state = await refundByLocation.deviceStates(accounts[1]);
+    assert.equal(state, 1, "Device not added successfully");
+  });
 
-        expect(await geoToken.totalSupply()).to.equal(/* expected total supply */);
-    });
-
-    it("Should deploy RefundByLocation contract", async function () {
-        const RefundByLocation = await ethers.getContractFactory("RefundByLocation");
-        const refundByLocation = await RefundByLocation.deploy();
-
-        await refundByLocation.deployed();
-
-        // Contract deployment assertions 
-        expect(await refundByLocation.owner()).to.equal(/* expected owner address */);
-    });
-
-   
+  // Add more tests for other functions and scenarios
 });
+
