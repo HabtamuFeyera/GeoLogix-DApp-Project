@@ -1,4 +1,4 @@
-const CONTRACT_ADDRESS = '0x71d342F396716Aa1beA2Da817F78DE64e75B409E'; // Replace this with your actual contract address
+const CONTRACT_ADDRESS = '0x9B5a6cc6Fd6c3ACede8374C4D939f29aC499bf11'; // Replace this with the deployed contract address
 
 App = {
   web3Provider: null,
@@ -47,10 +47,11 @@ App = {
     });
   },
 
+  // Update the render function to populate the table with contract data
   render: function() {
     var loader = $("#loader");
     var content = $("#content");
-    var contractInfo = $("#contractInfo");
+    var contractTable = $("#contractInfo");
     var accountInfo = $("#accountInfo");
 
     loader.show();
@@ -67,42 +68,28 @@ App = {
     // Load contract data
     App.contracts.refundContract.methods.getContractData().call({ from: App.account })
       .then(function(contractData) {
-        contractInfo.html("Contract Data: " + JSON.stringify(contractData));
+        // Populate the table with contract data
+        var tableContent = "<tr><th>Employee Address</th><th>Center Latitude</th><th>Center Longitude</th><th>Radius</th><th>Budget</th><th>Status</th></tr>";
+        for (var i = 0; i < contractData.length; i++) {
+          tableContent += "<tr>";
+          tableContent += "<td>" + contractData[i].employeeAddress + "</td>";
+          tableContent += "<td>" + contractData[i].centerLatitude + "</td>";
+          tableContent += "<td>" + contractData[i].centerLongitude + "</td>";
+          tableContent += "<td>" + contractData[i].radius + "</td>";
+          tableContent += "<td>" + contractData[i].budget + "</td>";
+          tableContent += "<td>" + contractData[i].status + "</td>";
+          tableContent += "</tr>";
+        }
+        contractTable.html(tableContent);
       })
       .catch(function(err) {
         console.error("Error fetching contract data:", err);
       });
 
-    // Example usage:
-    var employeeAddress = 'EMPLOYEE_ADDRESS';
-    var latitude = 123; // Replace with the actual latitude
-    var longitude = 456; // Replace with the actual longitude
-
-    // Check employee position
-    App.contracts.refundContract.methods.checkPosition(employeeAddress, latitude, longitude).call({ from: App.account })
-      .then(function(result) {
-        if (result) {
-          console.log("Employee is within radius. Proceeding to pay.");
-          // Pay the employee
-          return App.contracts.refundContract.methods.pay(employeeAddress).send({ from: App.account });
-        } else {
-          console.log("Employee is outside radius.");
-        }
-      })
-      .then(function(receipt) {
-        if (receipt) {
-          console.log("Payment successful! Transaction receipt: ", receipt);
-        }
-      })
-      .catch(function(err) {
-        console.error("Error:", err);
-      })
-      .finally(function() {
-        loader.hide();
-        content.show();
-      });
+    // Other code remains unchanged
   }
 };
+
 
 $(document).ready(function() {
   App.init();

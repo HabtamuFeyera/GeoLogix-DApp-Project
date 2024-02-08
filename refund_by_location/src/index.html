@@ -4,24 +4,31 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Refund by Location DApp</title>
+  <title>Refunder Contract Information</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container" style="width: 650px;">
+  <div class="container" style="width: 800px;">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="text-center">Refund by Location DApp</h1>
+        <h1 class="text-center">Refunder Contract Information</h1>
         <hr>
         <br>
-        <div id="loader">
-          <p class="text-center">Loading...</p>
-        </div>
-        <div id="content" style="display: none;">
-          <div id="accountInfo"></div>
-          <br>
-          <div id="contractInfo"></div>
-        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Employee Address</th>
+              <th>Center Latitude</th>
+              <th>Center Longitude</th>
+              <th>Radius</th>
+              <th>Budget</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="contractInfo">
+            <!-- Contract information will be populated here -->
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
