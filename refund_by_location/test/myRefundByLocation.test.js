@@ -1,18 +1,54 @@
-// test/RefundByLocation.test.js
-const RefundByLocation = artifacts.require('RefundByLocation');
+const RefunderContract = artifacts.require("RefunderContract");
 
-contract('RefundByLocation', (accounts) => {
-    let refundByLocation;
+contract("RefunderContract", (accounts) => {
+  let refunderContract;
 
-    before(async () => {
-        refundByLocation = await RefundByLocation.deployed();
-    });
+  beforeEach(async () => {
+    refunderContract = await RefunderContract.new({ from: accounts[0] });
+  });
 
-    it('should add a device', async () => {
-        await refundByLocation.addDevice(accounts[1], { from: accounts[0] });
-        const isDeviceAdded = await refundByLocation.devices(accounts[1]);
-        assert.equal(isDeviceAdded, true, 'Device was not added successfully');
-    });
+  it("should add employee", async () => {
+    const employeeAddress = accounts[1];
+    await refunderContract.addEmployee(
+      employeeAddress,
+      123,
+      456,
+      100,
+      50,
+      { from: accounts[0] }
+    );
+    const contractInfo = await refunderContract.contractInfo(employeeAddress);
+    assert.isTrue(contractInfo.center_lat !== 0, "Employee was not added");
+  });
 
-    // Add more test cases for other functionalities
+  it("should check employee position", async () => {
+    const employeeAddress = accounts[1];
+    await refunderContract.addEmployee(
+      employeeAddress,
+      123,
+      456,
+      100,
+      50,
+      { from: accounts[0] }
+    );
+    await refunderContract.checkPosition(120, 450, { from: employeeAddress });
+    const contractInfo = await refunderContract.contractInfo(employeeAddress);
+    assert.isTrue(contractInfo.status, "Employee status not updated");
+  });
+
+  it("should pay employee", async () => {
+    const employeeAddress = accounts[1];
+    await refunderContract.addEmployee(
+      employeeAddress,
+      123,
+      456,
+      100,
+      50,
+      { from: accounts[0] }
+    );
+    await refunderContract.checkPosition(120, 450, { from: employeeAddress });
+    await refunderContract.pay(employeeAddress, { from: accounts[0], value: 50 });
+    const contractInfo = await refunderContract.contractInfo(employeeAddress);
+    assert.isFalse(contractInfo.status, "Employee not paid");
+  });
 });

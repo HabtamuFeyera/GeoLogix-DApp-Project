@@ -1,4 +1,4 @@
-var RefunderContract = artifacts.require("./myRefundByLocation.sol");
+const RefunderContract = artifacts.require("RefunderContract");
 
 module.exports = function(deployer) {
   deployer.deploy(RefunderContract);

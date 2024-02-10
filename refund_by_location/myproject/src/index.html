@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Refund Contract Data</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container" style="width: 650px;">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="text-center">Refund Contract Data</h1> <!-- Title -->
+        <hr/>
+        <br/>
+        <div id="loader">
+          <p class="text-center">Loading...</p> <!-- Loader while data is being fetched -->
+        </div>
+        <div id="content" style="display: none;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th> <!-- Contract ID -->
+                <th scope="col">Minimum Point Long</th> <!-- Minimum Point Longitude -->
+                <th scope="col">Minimum Point Lat</th> <!-- Minimum Point Latitude -->
+                <th scope="col">Maximum Point Long</th> <!-- Maximum Point Longitude -->
+                <th scope="col">Maximum Point Lat</th> <!-- Maximum Point Latitude -->
+                <th scope="col">Starting Time</th> <!-- Starting Time -->
+                <th scope="col">Duration</th> <!-- Duration -->
+                <th scope="col">Gathered Location Count</th> <!-- Gathered Location Count -->
+                <th scope="col">Contract Truth</th> <!-- Contract Truth -->
+                <th scope="col">Completed</th> <!-- Completed -->
+                <th scope="col">Employee ID</th> <!-- Employee ID -->
+                <th scope="col">Employer ID</th> <!-- Employer ID -->
+              </tr>
+            </thead>
+            <tbody id="contractData"> <!-- Contract data will be dynamically inserted here -->
+            </tbody>
+          </table>
+          <hr/>
+          <p id="accountAddress" class="text-center"></p> <!-- Account Address -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- Web3.js -->
+  <script src="js/web3.min.js"></script>
+  <!-- Truffle Contract -->
+  <script src="js/truffle-contract.js"></script>
+  <!-- Custom JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+</html>
